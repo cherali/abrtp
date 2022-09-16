@@ -6,8 +6,8 @@ import { LOGIN_ROUTE } from 'constants/routes'
 interface IPrivateRouteProps {}
 
 const PrivateRoute: FC<IPrivateRouteProps> = () => {
-	// TODO: get login status based on token
-	const isLogin = false
+	const { user } = JSON.parse(localStorage.getItem('data') || '{"user":{}}')
+	const isLogin = Boolean(user.token) || false
 
 	return isLogin ? <Outlet /> : <Navigate replace to={LOGIN_ROUTE} />
 }
