@@ -1,0 +1,56 @@
+@import "theme/_overrides";
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/mixins";
+
+
+.toast-container {
+  border-radius: 4px;
+  border-style: solid;
+  border-width: 1px;
+
+  button {
+    align-self: center;
+    margin-top: -4px;
+    color: $gray-700;
+  }
+}
+
+.message-success {
+  color: shade-color($success, 65%);
+  background: shade-color($success, 12%);
+  border-color: shade-color($success, 70%);
+}
+
+.message-error {
+  background: $alert-danger-color;
+  color: $alert-danger-text-color;
+  border-color: $alert-danger-border-color;
+}
+
+.message-info {
+  color: shade-color($info, 50%);
+  background: shade-color($info, 0%);
+  border-color: shade-color($info, 30%);
+}
+
+.message-warning {
+  color: shade-color($warning, 40%);
+  background: tint-color($warning, 30%);
+  border-color: shade-color($warning, 30%);
+}
+
+.message-default {
+  color: shade-color($gray-200, 99%);
+  background: tint-color($gray-200, 100%);
+  border-color: shade-color($gray-200, 10%);
+}
+
+.message-dark {
+  color: shade-color($gray-200, 99%);
+  background: tint-color($gray-200, 100%);
+  border-color: shade-color($gray-200, 10%);
+}
+
+:root {
+  --toastify-toast-width: 450px;
+}
