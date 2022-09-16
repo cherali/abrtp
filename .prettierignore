@@ -13,6 +13,8 @@ yarn.lock
 test-report.*
 coverage
 
+.scss
+
 # debug
 npm-debug.log*
 yarn-debug.log*
