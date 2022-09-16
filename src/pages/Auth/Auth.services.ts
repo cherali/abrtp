@@ -1,20 +1,32 @@
 import { createApi } from '@reduxjs/toolkit/query/react'
 import { axiosBaseQuery } from 'utils/apiUtil'
-import { loginUrl } from 'constants/urls'
+import { loginUrl, registerUrl } from 'constants/urls'
+
+interface User {
+	email: string
+	username: string
+	bio: string
+	image: string
+	token: string
+}
 
 export interface LoginUserData {
 	email: string
 	password: string
 }
 
+export interface RegisterUserData {
+	username: string
+	email: string
+	password: string
+}
+
 interface LoginUserResult {
-	user: {
-		email: string
-		username: string
-		bio: string
-		image: string
-		token: string
-	}
+	user: User
+}
+
+interface RegisterUserResult {
+	user: User
 }
 
 export const usersApi = createApi({
@@ -33,8 +45,17 @@ export const usersApi = createApi({
 			transformResponse(response: LoginUserResult) {
 				return response
 			}
+		}),
+		registerUser: build.mutation<RegisterUserResult, RegisterUserData>({
+			query: data => ({
+				url: registerUrl,
+				method: 'POST',
+				data: {
+					user: data
+				}
+			})
 		})
 	})
 })
 
-export const { useLoginUserMutation } = usersApi
+export const { useLoginUserMutation, useRegisterUserMutation } = usersApi
