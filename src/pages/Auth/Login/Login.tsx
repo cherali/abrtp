@@ -57,7 +57,7 @@ const Login: FC = () => {
 				<Form onSubmit={onSubmit}>
 					<Input type='email' name='email' label='Email' noPlaceholder />
 					<Input type='password' name='password' label='Password' noPlaceholder required inValidText='Required field' autoComplete='on' />
-					<div>
+					<div className='mt-4'>
 						<Button loading={loginUserResult.isLoading} type='submit' fullWidth>
 							Login
 						</Button>
