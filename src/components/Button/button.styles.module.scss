@@ -1,3 +1,11 @@
 .button {
-  color: #fff !important;
+  &:not([class*=outline] ){
+    color: #fff !important;
+  }
+
+  &[class*=outline]{
+    &:hover {
+      color: #fff !important;
+    }
+  }
 }
