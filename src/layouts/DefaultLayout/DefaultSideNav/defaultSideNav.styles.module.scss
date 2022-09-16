@@ -1,0 +1,24 @@
+@import "theme/_overrides";
+
+.side-nav {
+  background-color: $blue;
+  width: $sidebar-width;
+  position: fixed;
+  height: 100%;
+  overflow: auto;
+
+  span {
+    font-size: 22px;
+    color: white;
+  }
+  a {
+    color: white;
+    &:hover {
+      color: blackxz !important;
+    }
+  }
+}
+
+.active {
+  background-color: #ffffff26;
+}
