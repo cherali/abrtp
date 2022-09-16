@@ -1,4 +1,5 @@
 import { FC, useEffect } from 'react'
+import clsx from 'clsx'
 import { Link, useNavigate } from 'react-router-dom'
 import Container from 'react-bootstrap/Container'
 import { toast } from 'react-toastify'
@@ -46,8 +47,8 @@ const Register: FC = () => {
 	}, [registerUserResult])
 
 	return (
-		<Container className={classes.wrapper}>
-			<Content addSpacing lg={4}>
+		<Container className={clsx(classes.wrapper, 'd-flex justify-content-center p-0 align-items-xs-start align-items-md-center')}>
+			<Content addSpacing lg={4} md={9} xs={12}>
 				<h1 className={classes.title}>Register</h1>
 				<Form onSubmit={onSubmit}>
 					<Input type='text' name='username' label='Username' noPlaceholder required inValidText='Required field' />
