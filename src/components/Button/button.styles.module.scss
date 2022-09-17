@@ -1,4 +1,5 @@
 .button {
+  min-width: 100px;
   &:not([class*=outline] ){
     color: #fff !important;
   }
