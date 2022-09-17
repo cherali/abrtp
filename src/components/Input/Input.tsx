@@ -1,8 +1,9 @@
 import type { FC } from 'react'
 import { useField } from 'formik'
 import Form from 'react-bootstrap/Form'
+import type { FormControlProps } from 'react-bootstrap/FormControl'
 
-interface InputProps {
+interface InputProps extends FormControlProps {
 	type?: string
 	wrapperClassName?: string
 	label: string
@@ -14,6 +15,7 @@ interface InputProps {
 	noPlaceholder?: boolean
 	autoComplete?: string
 	name: string
+	rows?: number
 }
 
 const Input: FC<InputProps> = ({
@@ -27,7 +29,8 @@ const Input: FC<InputProps> = ({
 	column = false,
 	noPlaceholder = false,
 	autoComplete = false,
-	name
+	name,
+	...rest
 }) => {
 	const [field, meta] = useField(name)
 
@@ -48,6 +51,7 @@ const Input: FC<InputProps> = ({
 					disabled={disabled}
 					autoComplete={autoComplete.toString()}
 					placeholder={noPlaceholder ? '' : placeholder || label}
+					{...rest}
 				/>
 				{Boolean(helperText) && <Form.Text className='text-muted'>{helperText}</Form.Text>}
 				{meta.touched && <Form.Control.Feedback type='invalid'>{meta.error}</Form.Control.Feedback>}
