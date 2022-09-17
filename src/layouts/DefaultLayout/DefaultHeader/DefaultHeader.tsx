@@ -1,4 +1,5 @@
 import type { FC } from 'react'
+import { useNavigate } from 'react-router-dom'
 import Container from 'react-bootstrap/Container'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
@@ -6,9 +7,20 @@ import NavbarBrand from 'react-bootstrap/NavbarBrand'
 import Offcanvas from 'react-bootstrap/Offcanvas'
 import { useUser } from 'hooks/useUser'
 import Button from 'components/Button'
+import { HOME_ROUTE } from 'constants/routes'
 
 const DefaultHeader: FC = () => {
 	const user = useUser()
+
+	const navigate = useNavigate()
+
+	const handleLogout = () => {
+		localStorage.removeItem('data')
+
+		setTimeout(() => {
+			navigate(HOME_ROUTE)
+		})
+	}
 
 	return (
 		<Navbar bg='dark' variant='dark' expand='md' className='px-3 py-3' sticky='top'>
@@ -31,7 +43,9 @@ const DefaultHeader: FC = () => {
 						<Nav className='justify-content-end flex-grow-1'>
 							<h6 className='mb-3'>Wellcome {user.username}</h6>
 
-							<Button variant='outline-primary'>Logout</Button>
+							<Button variant='outline-primary' onClick={handleLogout}>
+								Logout
+							</Button>
 						</Nav>
 					</Offcanvas.Body>
 				</Navbar.Offcanvas>
