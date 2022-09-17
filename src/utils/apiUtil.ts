@@ -1,10 +1,12 @@
-import axios, { AxiosError, AxiosRequestConfig } from 'axios'
+import axios, { AxiosError, AxiosRequestConfig, AxiosRequestHeaders } from 'axios'
 import { BaseQueryFn } from '@reduxjs/toolkit/query'
 
 interface QueryProps {
 	url: string
 	method: AxiosRequestConfig['method']
 	data?: AxiosRequestConfig['data']
+	useAuth?: boolean
+	headers?: AxiosRequestHeaders
 }
 
 interface AxiosBaseQueryError {
@@ -18,9 +20,16 @@ export interface ActionErrorType {
 
 export const axiosBaseQuery =
 	({ baseUrl }: { baseUrl?: string } = { baseUrl: '' }): BaseQueryFn<QueryProps, unknown, AxiosBaseQueryError> =>
-	async ({ url, method, data }) => {
+	async ({ url, method, data, useAuth = false, headers = {} }) => {
 		try {
-			const result = await axios({ url: baseUrl + url, method, data })
+			if (useAuth) {
+				const { user } = JSON.parse(localStorage.getItem('data') || '{"user":{}}')
+				if (user.token) {
+					headers['Authorization'] = `Token ${user.token}`
+				}
+			}
+
+			const result = await axios({ url: baseUrl + url, method, data, headers })
 
 			return {
 				data: result.data
