@@ -33,8 +33,6 @@ const Table = <T extends object>({ columns, data, showTableNumber = false, loadi
 		<div>
 			{loading && <Loading />}
 
-			{!loading && data?.length === 0 && <p>No Data</p>}
-
 			{!loading && data && (
 				<>
 					<BTable>
@@ -47,6 +45,14 @@ const Table = <T extends object>({ columns, data, showTableNumber = false, loadi
 							</tr>
 						</thead>
 						<tbody>
+							{!loading && data?.length === 0 && (
+								<tr>
+									<td className='text-center' colSpan={columns.length + (showTableNumber ? 1 : 0)}>
+										No Data
+									</td>
+								</tr>
+							)}
+
 							{data.map((row, index) => (
 								<tr key={index}>
 									{showTableNumber && <td>{index + 1 + Number(paginationProps?.pageSize || 0) * (Number(paginationProps?.currentPage || 0) - 1)}</td>}
