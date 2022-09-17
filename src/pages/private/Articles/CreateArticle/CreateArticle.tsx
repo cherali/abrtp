@@ -118,18 +118,20 @@ const CreateArticle: FC = () => {
 										placeholder='New Tag'
 									/>
 
-									{[...(tags || []), ...userDefiendTag]
-										.filter(uniqueArray<string>)
-										.sort((a, b) => a.localeCompare(b))
-										.map(tag => (
-											<Checkbox
-												name={tag}
-												key={tag}
-												label={tag}
-												onChange={handleChangeTagList(setFieldValue, values.tagList)}
-												defaultChecked={userDefiendTag.includes(tag) || values.tagList.includes(tag)}
-											/>
-										))}
+									<div className='border border-1 rounded-1 p-3'>
+										{[...(tags || []), ...userDefiendTag]
+											.filter(uniqueArray<string>)
+											.sort((a, b) => a.localeCompare(b))
+											.map(tag => (
+												<Checkbox
+													name={tag}
+													key={tag}
+													label={tag}
+													onChange={handleChangeTagList(setFieldValue, values.tagList)}
+													defaultChecked={userDefiendTag.includes(tag) || values.tagList.includes(tag)}
+												/>
+											))}
+									</div>
 								</div>
 							)}
 						</Col>
