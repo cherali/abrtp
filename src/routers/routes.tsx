@@ -1,6 +1,15 @@
 import { lazy } from 'react'
 import { useRoutes } from 'react-router-dom'
-import { ARTICLES_ROUTE, ARTICLES_ROUTE_QUERY, DASHBOARD_ROUTE, HOME_ROUTE, LOGIN_ROUTE, NOT_FOUND_ROUTE, REGISTER_ROUTE } from 'constants/routes'
+import {
+	ARTICLES_ROUTE,
+	ARTICLES_ROUTE_QUERY,
+	CREATE_ARTICLE_ROUTE,
+	DASHBOARD_ROUTE,
+	HOME_ROUTE,
+	LOGIN_ROUTE,
+	NOT_FOUND_ROUTE,
+	REGISTER_ROUTE
+} from 'constants/routes'
 
 import PrivateRoute from './PrivateRoute'
 
@@ -11,6 +20,7 @@ const RegisterPage = lazy(() => import('pages/Auth/Register'))
 
 const DashboardPage = lazy(() => import('pages/private/Dashboard'))
 const ArticlesPage = lazy(() => import('pages/private/Articles'))
+const CreateArticlePage = lazy(() => import('pages/private/Articles/CreateArticle'))
 
 export const Routes = () =>
 	useRoutes([
@@ -46,6 +56,10 @@ export const Routes = () =>
 							element: <ArticlesPage />
 						}
 					]
+				},
+				{
+					path: CREATE_ARTICLE_ROUTE,
+					element: <CreateArticlePage />
 				}
 			]
 		},

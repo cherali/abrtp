@@ -1,6 +1,6 @@
 import type { FC, ReactNode } from 'react'
 import Container from 'react-bootstrap/Container'
-import { ARTICLES_ROUTE, DASHBOARD_ROUTE } from 'constants/routes'
+import { ARTICLES_ROUTE, CREATE_ARTICLE_ROUTE, DASHBOARD_ROUTE } from 'constants/routes'
 import DefaultContent from './DefaultContent'
 import DefaultHeader from './DefaultHeader'
 import DefaultSideNav from './DefaultSideNav'
@@ -12,7 +12,7 @@ interface DefaultLayoutProps {
 export interface SidebarLinkItem {
 	text: string
 	linkTo: string
-	checkInclude?: boolean
+	checkInclude?: Array<string>
 }
 
 const DefaultLayout: FC<DefaultLayoutProps> = ({ children }) => {
@@ -20,8 +20,8 @@ const DefaultLayout: FC<DefaultLayoutProps> = ({ children }) => {
 
 	const sidebarLinks: Array<SidebarLinkItem> = [
 		{ text: 'Dashboard', linkTo: DASHBOARD_ROUTE },
-		{ text: 'All Articles', linkTo: ARTICLES_ROUTE, checkInclude: true },
-		{ text: 'New Article', linkTo: '/home' }
+		{ text: 'All Articles', linkTo: ARTICLES_ROUTE, checkInclude: ['page'] },
+		{ text: 'New Article', linkTo: CREATE_ARTICLE_ROUTE }
 	]
 	return (
 		<div>

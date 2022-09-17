@@ -27,7 +27,9 @@ const DefaultSideNav: FC<DefaultSideNavProps> = ({ sidebarLinks, sidebarTitle })
 							key={index}
 							className={clsx(
 								'py-2 w-100 px-2',
-								(location.pathname === item.linkTo || (item.checkInclude && location.pathname.includes(item.linkTo))) && classes.active
+								(location.pathname === item.linkTo ||
+									(item.checkInclude && item.checkInclude.some(link => location.pathname.includes(`${item.linkTo}/${link}`)))) &&
+									classes.active
 							)}
 						>
 							<Link to={item.linkTo} className='w-100 d-inline-block align-middle px-4'>

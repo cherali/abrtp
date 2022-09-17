@@ -1,4 +1,4 @@
-import { articlesUrl } from 'constants/urls'
+import { articlesUrl, tagsUrl } from 'constants/urls'
 import { createApi } from '@reduxjs/toolkit/query/react'
 import { axiosBaseQuery } from 'utils/apiUtil'
 import { convertToUrlString } from 'utils/helpers'
@@ -36,6 +36,21 @@ interface GetArticlesListParams {
 	// favorited: string
 }
 
+interface TagsResult {
+	tags: Array<string>
+}
+
+interface CreateArticleResult {
+	article: Article
+}
+
+export interface CreateArticleParams {
+	title: string
+	description: string
+	body: string
+	tagList: Array<string>
+}
+
 export const articlesApi = createApi({
 	reducerPath: 'articles',
 	baseQuery: axiosBaseQuery({ baseUrl: process.env.REACT_APP_API_URL }),
@@ -45,8 +60,29 @@ export const articlesApi = createApi({
 				url: `${articlesUrl}?${convertToUrlString({ limit, offset })}`,
 				method: 'GET'
 			})
+		}),
+
+		getTagList: build.query<Array<string>, unknown>({
+			query: () => ({
+				url: tagsUrl,
+				method: 'GET'
+			}),
+			transformResponse(response: TagsResult) {
+				return response.tags
+			}
+		}),
+
+		createArtile: build.mutation<CreateArticleResult, CreateArticleParams>({
+			query: article => ({
+				url: articlesUrl,
+				method: 'POST',
+				useAuth: true,
+				data: {
+					article
+				}
+			})
 		})
 	})
 })
 
-export const { useGetArticlesListQuery, useLazyGetArticlesListQuery } = articlesApi
+export const { useGetArticlesListQuery, useLazyGetArticlesListQuery, useGetTagListQuery, useCreateArtileMutation } = articlesApi
