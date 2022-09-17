@@ -44,6 +44,7 @@ const Login: FC = () => {
 			// 3. save user in localStorage
 			// token most be save in cookies with httpOnly flag
 			// but react cant do that so for now just save user object in local storage
+			// ATTENTION: By saving token directly in localStorage, we can't set expiration date for revoking token
 			localStorage.setItem('data', JSON.stringify({ user: loginUserResult.data.user }))
 
 			// redirect to dashboard
