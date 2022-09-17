@@ -16,6 +16,8 @@ interface AxiosBaseQueryError {
 
 export interface ActionErrorType {
 	errors?: object
+	status?: number
+	message?: string
 }
 
 export const axiosBaseQuery =
