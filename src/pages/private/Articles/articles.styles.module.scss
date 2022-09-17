@@ -1,0 +1,25 @@
+@import "theme/_overrides";
+
+.action {
+  > button {
+    color: white !important;
+  }
+
+  button.action-button {
+    color: black !important;
+  }
+
+}
+
+
+.action-button {
+  border: none;
+  border-radius: 0;
+  text-align: start;
+  padding: 4px 16px;
+  background: white;
+  &:hover {
+    color: black !important;
+    background: $gray-200 !important;
+  }
+}

@@ -23,7 +23,13 @@ const DefaultSideNav: FC<DefaultSideNavProps> = ({ sidebarLinks, sidebarTitle })
 
 				<Nav className='flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start'>
 					{sidebarLinks.map((item, index) => (
-						<NavItem key={index} className={clsx('py-2 w-100 px-2', location.pathname === item.linkTo && classes.active)}>
+						<NavItem
+							key={index}
+							className={clsx(
+								'py-2 w-100 px-2',
+								(location.pathname === item.linkTo || (item.checkInclude && location.pathname.includes(item.linkTo))) && classes.active
+							)}
+						>
 							<Link to={item.linkTo} className='w-100 d-inline-block align-middle px-4'>
 								{item.text}
 							</Link>

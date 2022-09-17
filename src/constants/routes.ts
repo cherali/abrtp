@@ -8,3 +8,5 @@ export const REGISTER_ROUTE = '/auth/register'
 
 // PRIVATE
 export const DASHBOARD_ROUTE = '/dashboard'
+export const ARTICLES_ROUTE = '/articles'
+export const ARTICLES_ROUTE_QUERY = '/articles/page/:pageIndex'

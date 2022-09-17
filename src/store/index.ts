@@ -1,11 +1,13 @@
-import { usersApi } from './../pages/Auth/Auth.services'
+import { articlesApi } from 'pages/private/Articles/Articles.services'
+import { usersApi } from 'pages/Auth/Auth.services'
 import { Action, configureStore, ThunkAction } from '@reduxjs/toolkit'
 
 export const store = configureStore({
 	reducer: {
-		[usersApi.reducerPath]: usersApi.reducer
+		[usersApi.reducerPath]: usersApi.reducer,
+		[articlesApi.reducerPath]: articlesApi.reducer
 	},
-	middleware: getDefaultMiddleware => getDefaultMiddleware({ serializableCheck: false }).concat(usersApi.middleware)
+	middleware: getDefaultMiddleware => getDefaultMiddleware({ serializableCheck: false }).concat(usersApi.middleware, articlesApi.middleware)
 })
 
 export type AppDispatch = typeof store.dispatch
