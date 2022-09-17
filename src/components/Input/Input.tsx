@@ -1,4 +1,5 @@
 import type { FC } from 'react'
+import clsx from 'clsx'
 import { useField } from 'formik'
 import Form from 'react-bootstrap/Form'
 import type { FormControlProps } from 'react-bootstrap/FormControl'
@@ -40,7 +41,7 @@ const Input: FC<InputProps> = ({
 	return (
 		<Form.Group className={wrapperClassName}>
 			<Form.Group>
-				<Form.Label visuallyHidden={hiddenLable} column={column}>
+				<Form.Label className={clsx(isInvalid && 'text-danger')} visuallyHidden={hiddenLable} column={column}>
 					{label}
 				</Form.Label>
 				<Form.Control
