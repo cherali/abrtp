@@ -82,7 +82,7 @@ const CreateArticle: FC = () => {
 		else if (createArticleResult.error) {
 			const errors = (createArticleResult?.error as ActionErrorType).errors
 
-			Object.entries(errors || {})?.map(item => toast.error(`${item[0]} ${item[1]}`))
+			Object.entries(errors || {})?.forEach(item => toast.error(`${item[0]} ${item[1]}`))
 		}
 	}, [createArticleResult])
 

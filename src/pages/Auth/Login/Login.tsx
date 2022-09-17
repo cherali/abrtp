@@ -55,7 +55,7 @@ const Login: FC = () => {
 		if (loginUserResult.error) {
 			const errors = (loginUserResult?.error as ActionErrorType).errors
 
-			Object.entries(errors || {})?.map(item =>
+			Object.entries(errors || {})?.forEach(item =>
 				toast.error(`${item[0]} ${item[1]}`, {
 					bodyClassName: classes['error-prefix']
 				})

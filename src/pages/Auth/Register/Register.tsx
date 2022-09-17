@@ -51,7 +51,7 @@ const Register: FC = () => {
 		if (registerUserResult.error) {
 			const errors = (registerUserResult?.error as ActionErrorType).errors
 
-			Object.entries(errors || {})?.map(item =>
+			Object.entries(errors || {})?.forEach(item =>
 				toast.error(`${item[0]} ${item[1]}`, {
 					bodyClassName: classes['error-prefix']
 				})
