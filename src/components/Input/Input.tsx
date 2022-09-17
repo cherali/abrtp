@@ -1,9 +1,9 @@
-import type { FC, HTMLInputTypeAttribute } from 'react'
+import type { FC } from 'react'
+import { useField } from 'formik'
 import Form from 'react-bootstrap/Form'
-import type { FormControlProps } from 'react-bootstrap/FormControl'
 
-interface InputProps extends FormControlProps {
-	type?: HTMLInputTypeAttribute
+interface InputProps {
+	type?: string
 	wrapperClassName?: string
 	label: string
 	helperText?: string
@@ -12,10 +12,8 @@ interface InputProps extends FormControlProps {
 	hiddenLable?: boolean
 	column?: boolean | 'sm' | 'lg'
 	noPlaceholder?: boolean
-	required?: boolean
-	inValidText?: string
-	name: string
 	autoComplete?: string
+	name: string
 }
 
 const Input: FC<InputProps> = ({
@@ -28,18 +26,32 @@ const Input: FC<InputProps> = ({
 	hiddenLable = false,
 	column = false,
 	noPlaceholder = false,
-	inValidText = '',
-	name,
-	...rest
+	autoComplete = false,
+	name
 }) => {
+	const [field, meta] = useField(name)
+
+	const isValid = !meta.error
+	const isInvalid = meta.touched && !isValid
+
 	return (
 		<Form.Group className={wrapperClassName}>
-			<Form.Label visuallyHidden={hiddenLable} column={column}>
-				{label}
-			</Form.Label>
-			<Form.Control data-name={name} disabled={disabled} type={type} placeholder={noPlaceholder ? '' : placeholder || label} {...rest} />
-			{Boolean(helperText) && <Form.Text className='text-muted'>{helperText}</Form.Text>}
-			<Form.Control.Feedback type='invalid'>{inValidText}</Form.Control.Feedback>
+			<Form.Group>
+				<Form.Label visuallyHidden={hiddenLable} column={column}>
+					{label}
+				</Form.Label>
+				<Form.Control
+					{...field}
+					type={type}
+					isValid={meta.touched && isValid}
+					isInvalid={isInvalid}
+					disabled={disabled}
+					autoComplete={autoComplete.toString()}
+					placeholder={noPlaceholder ? '' : placeholder || label}
+				/>
+				{Boolean(helperText) && <Form.Text className='text-muted'>{helperText}</Form.Text>}
+				{meta.touched && <Form.Control.Feedback type='invalid'>{meta.error}</Form.Control.Feedback>}
+			</Form.Group>
 		</Form.Group>
 	)
 }

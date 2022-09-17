@@ -3,9 +3,10 @@ import clsx from 'clsx'
 import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { Container } from 'react-bootstrap'
+import * as Yup from 'yup'
+import { Formik, Form } from 'formik'
 import Button from 'components/Button'
 import Content from 'components/Content'
-import Form from 'components/Form'
 import Input from 'components/Input'
 import { DASHBOARD_ROUTE, REGISTER_ROUTE } from 'constants/routes'
 import { ActionErrorType } from 'utils/apiUtil'
@@ -16,6 +17,16 @@ import classes from './login.styles.module.scss'
 const Login: FC = () => {
 	const [loginUser, loginUserResult] = useLoginUserMutation()
 	const navigate = useNavigate()
+
+	const validationSchema = Yup.object().shape({
+		email: Yup.string().email('Invalid email').required('Required Field'),
+		password: Yup.string().required('Required Field')
+	})
+
+	const initialValues: LoginUserData = {
+		email: '',
+		password: ''
+	}
 
 	const onSubmit = (values: LoginUserData) => {
 		loginUser(values)
@@ -55,15 +66,19 @@ const Login: FC = () => {
 		<Container className={clsx(classes.wrapper, 'd-flex justify-content-center p-0 align-items-xs-start align-items-md-center')}>
 			<Content addSpacing lg={4} md={9} xs={12}>
 				<h1 className={classes.title}>Login</h1>
-				<Form onSubmit={onSubmit}>
-					<Input type='email' name='email' label='Email' noPlaceholder />
-					<Input type='password' name='password' label='Password' noPlaceholder required inValidText='Required field' autoComplete='on' />
-					<div className='mt-4'>
-						<Button loading={loginUserResult.isLoading} type='submit' fullWidth>
-							Login
-						</Button>
-					</div>
-				</Form>
+
+				<Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
+					<Form>
+						<Input label='Email' name='email' type='email' noPlaceholder />
+						<Input label='PassWord' name='password' type='password' noPlaceholder />
+						<div className='mt-4'>
+							<Button loading={loginUserResult.isLoading} type='submit' fullWidth>
+								Login
+							</Button>
+						</div>
+					</Form>
+				</Formik>
+
 				<div className='d-flex gap-2 mt-3 align-items-center'>
 					<p className='mb-0'>{`Don't have account? `}</p>
 					<Link className={classes.register} to={REGISTER_ROUTE}>
