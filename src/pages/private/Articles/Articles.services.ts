@@ -71,6 +71,12 @@ export interface GetAnArticleParams {
 	slug: string
 }
 
+interface DeleteArticleResult {}
+
+export interface DeleteArticleParams {
+	slug: string
+}
+
 export const articlesApi = createApi({
 	reducerPath: 'articles',
 	baseQuery: axiosBaseQuery({ baseUrl: process.env.REACT_APP_API_URL }),
@@ -123,6 +129,14 @@ export const articlesApi = createApi({
 					article
 				}
 			})
+		}),
+
+		deleteArtile: build.mutation<DeleteArticleResult, DeleteArticleParams>({
+			query: ({ slug }) => ({
+				url: `${articlesUrl}/${slug}`,
+				method: 'DELETE',
+				useAuth: true
+			})
 		})
 	})
 })
@@ -133,5 +147,6 @@ export const {
 	useGetTagListQuery,
 	useCreateArtileMutation,
 	useGetAnArtileQuery,
-	useEditArtileMutation
+	useEditArtileMutation,
+	useDeleteArtileMutation
 } = articlesApi
