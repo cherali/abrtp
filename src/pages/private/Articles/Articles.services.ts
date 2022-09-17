@@ -51,6 +51,26 @@ export interface CreateArticleParams {
 	tagList: Array<string>
 }
 
+interface EditArticleResult {
+	article: Article
+}
+
+export interface EditArticleParams {
+	title: string
+	description: string
+	body: string
+	tagList: Array<string>
+	slug: string
+}
+
+interface GetAnArticleResult {
+	article: Article
+}
+
+export interface GetAnArticleParams {
+	slug: string
+}
+
 export const articlesApi = createApi({
 	reducerPath: 'articles',
 	baseQuery: axiosBaseQuery({ baseUrl: process.env.REACT_APP_API_URL }),
@@ -81,8 +101,37 @@ export const articlesApi = createApi({
 					article
 				}
 			})
+		}),
+
+		getAnArtile: build.query<Article, GetAnArticleParams>({
+			query: ({ slug }) => ({
+				url: `${articlesUrl}/${slug}`,
+				method: 'GET'
+			}),
+			keepUnusedDataFor: 0,
+			transformResponse(response: GetAnArticleResult) {
+				return response.article
+			}
+		}),
+
+		editArtile: build.mutation<EditArticleResult, EditArticleParams>({
+			query: ({ slug, ...article }) => ({
+				url: `${articlesUrl}/${slug}`,
+				method: 'PUT',
+				useAuth: true,
+				data: {
+					article
+				}
+			})
 		})
 	})
 })
 
-export const { useGetArticlesListQuery, useLazyGetArticlesListQuery, useGetTagListQuery, useCreateArtileMutation } = articlesApi
+export const {
+	useGetArticlesListQuery,
+	useLazyGetArticlesListQuery,
+	useGetTagListQuery,
+	useCreateArtileMutation,
+	useGetAnArtileQuery,
+	useEditArtileMutation
+} = articlesApi

@@ -8,7 +8,8 @@ import {
 	HOME_ROUTE,
 	LOGIN_ROUTE,
 	NOT_FOUND_ROUTE,
-	REGISTER_ROUTE
+	REGISTER_ROUTE,
+	EDIT_ARTICLE_ROUTE
 } from 'constants/routes'
 
 import PrivateRoute from './PrivateRoute'
@@ -21,6 +22,7 @@ const RegisterPage = lazy(() => import('pages/Auth/Register'))
 const DashboardPage = lazy(() => import('pages/private/Dashboard'))
 const ArticlesPage = lazy(() => import('pages/private/Articles'))
 const CreateArticlePage = lazy(() => import('pages/private/Articles/CreateArticle'))
+const EditArticlePage = lazy(() => import('pages/private/Articles/EditArticle'))
 
 export const Routes = () =>
 	useRoutes([
@@ -60,6 +62,10 @@ export const Routes = () =>
 				{
 					path: CREATE_ARTICLE_ROUTE,
 					element: <CreateArticlePage />
+				},
+				{
+					path: EDIT_ARTICLE_ROUTE,
+					element: <EditArticlePage />
 				}
 			]
 		},

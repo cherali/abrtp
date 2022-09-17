@@ -1,10 +1,10 @@
 import { FC, useEffect, useState } from 'react'
 import { Dropdown, DropdownButton } from 'react-bootstrap'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import Button from 'components/Button'
 import Table from 'components/Table'
 import { Column } from 'components/Table/Table'
-import { ARTICLES_ROUTE } from 'constants/routes'
+import { ARTICLES_ROUTE, EDIT_ARTICLE_ROUTE } from 'constants/routes'
 import { Article, useGetArticlesListQuery } from './Articles.services'
 
 import classes from './articles.styles.module.scss'
@@ -58,9 +58,11 @@ const Articles: FC = () => {
 		{
 			accessor: '',
 			header: 'Actions',
-			Cell: () => (
+			Cell: ({ slug }: Article) => (
 				<DropdownButton className={classes.action} drop='down' variant='info' title={`...`}>
-					<Dropdown.Item>Edit</Dropdown.Item>
+					<Link className='dropdown-item' to={EDIT_ARTICLE_ROUTE.replace(':slug', slug)}>
+						Edit
+					</Link>
 					<Dropdown.Divider />
 					<Button fullWidth className={classes['action-button']} variant='dark'>
 						Delete
