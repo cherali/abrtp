@@ -1,4 +1,35 @@
+
+@import "./overrides";
 a {
   text-decoration: none !important;
 }
 
+.tag-container {
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 324px;
+}
+
+.submit-button-wrapper {
+  @media only screen and (max-width: 768px) {
+    position: fixed;
+    bottom: 0;
+    left:0;
+    right: 0;
+    margin-top: 0 !important;
+    padding: 0.75rem 1rem;
+    background: $gray-200;
+    button {
+      padding: 0.5rem 1rem;
+      font-size: 1.25rem;
+      border-radius: 0.5rem;
+      width: 100%;
+    }
+  }
+}
+
+.margin-fix {
+  @media only screen and (max-width: 768px) {
+    margin-bottom: 85px !important;
+  }
+}

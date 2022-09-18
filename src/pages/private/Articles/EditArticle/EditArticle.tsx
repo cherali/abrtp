@@ -127,7 +127,7 @@ const EditArticle: FC = () => {
 
 	return (
 		<Container fluid>
-			<h1>Edit Article</h1>
+			<h1 className='mx-n3'>Edit Article</h1>
 			{isFetchingCurrentAricle && <Loading />}
 			{!isFetchingCurrentAricle && isErrorCurrentArticle && (
 				<div>
@@ -141,20 +141,20 @@ const EditArticle: FC = () => {
 			{!isFetchingCurrentAricle && !isErrorCurrentArticle && (
 				<Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
 					{({ values, setFieldValue }) => (
-						<Row className='mt-3 gap-3 flex-nowrap'>
-							<Col xl={9}>
+						<Row className='mt-3 gap-lg-4 gap-md-3 flex-md-nowrap flex-sm-wrap'>
+							<Col className='p-0' xl={9} lg={8} md={7} sm={12}>
 								<Form>
 									<Input label='Title' name='title' type='text' />
 									<Input label='Description' name='description' type='text' />
 									<Input label='Body' name='body' as='textarea' rows={8} noPlaceholder />
-									<div className='mt-4'>
+									<div className='mt-md-4 submit-button-wrapper'>
 										<Button loading={isFetchingTags || editArticleResult.isLoading} type='submit'>
 											Submit
 										</Button>
 									</div>
 								</Form>
 							</Col>
-							<Col xl={3}>
+							<Col className='p-0 margin-fix' xl={3} lg={4} md={5} sm={12}>
 								{isFetchingTags && <Loading />}
 								{!isFetchingTags && (
 									<div>
@@ -168,7 +168,7 @@ const EditArticle: FC = () => {
 											placeholder='New Tag'
 										/>
 
-										<div className='border border-1 rounded-1 p-3'>
+										<div className='border border-1 rounded-1 p-3 tag-container'>
 											{[...(tags || []), ...userDefiendTag]
 												.filter(uniqueArray<string>)
 												.sort((a, b) => a.localeCompare(b))

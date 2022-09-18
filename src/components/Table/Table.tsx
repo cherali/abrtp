@@ -35,7 +35,7 @@ const Table = <T extends object>({ columns, data, showTableNumber = false, loadi
 
 			{!loading && data && (
 				<>
-					<BTable>
+					<BTable responsive>
 						<thead className={classes.thead}>
 							<tr>
 								{showTableNumber && <th>#</th>}

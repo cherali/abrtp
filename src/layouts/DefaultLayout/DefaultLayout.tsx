@@ -25,7 +25,7 @@ const DefaultLayout: FC<DefaultLayoutProps> = ({ children }) => {
 	]
 	return (
 		<div>
-			<DefaultHeader />
+			<DefaultHeader sidebarLinks={sidebarLinks} />
 
 			<Container fluid className='p-0'>
 				<div>

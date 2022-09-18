@@ -15,7 +15,7 @@ const DefaultSideNav: FC<DefaultSideNavProps> = ({ sidebarLinks, sidebarTitle })
 	const location = useLocation()
 
 	return (
-		<div className={classes['side-nav']}>
+		<div className={clsx(classes['side-nav'], 'd-none d-md-block')}>
 			<Col className=''>
 				<div className='px-3 py-2'>
 					<span className='px-2 my-1'>{sidebarTitle}</span>
