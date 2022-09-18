@@ -132,7 +132,7 @@ const Articles: FC = () => {
 				}}
 			/>
 
-			<Modal show={showDeleteConfirmation} onHide={handleCloseDeleteConfirmation}>
+			<Modal show={showDeleteConfirmation} onHide={handleCloseDeleteConfirmation} centered>
 				<Modal.Header closeButton>
 					<Modal.Title>Delete Article</Modal.Title>
 				</Modal.Header>
