@@ -57,7 +57,7 @@ const Table = <T extends object>({ columns, data, showTableNumber = false, loadi
 								<tr key={index}>
 									{showTableNumber && <td>{index + 1 + Number(paginationProps?.pageSize || 0) * (Number(paginationProps?.currentPage || 0) - 1)}</td>}
 									{columns.map((column, i) => {
-										const render = column.Cell ? column.Cell : () => getDescendantProp(row, column.accessor)
+										const render = column.Cell ? column.Cell : () => getDescendantProp<string>(row, column.accessor)
 
 										return <td key={i}>{render(row)}</td>
 									})}

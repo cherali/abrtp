@@ -1,9 +1,9 @@
-export const getDescendantProp = (obj: any, path: string | number | symbol) => {
-	const arr = path.toString().split(/[.[]['"]?/)
-	let newObj = obj
-	while (arr.length && newObj) {
-		newObj = newObj[(arr.shift() as string).replace(/['"]?]$/, '')]
-	}
+export const getDescendantProp = <T>(obj: object, path: string | number | symbol): T => {
+	const newPath = path.toString().split('.')
+	let newObj = { ...obj }
 
-	return newObj
+	for (let i = 0; i < newPath.length; i++) {
+		newObj = newObj[newPath[i] as keyof typeof obj]
+	}
+	return newObj as T
 }
