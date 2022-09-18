@@ -43,8 +43,12 @@ const CreateArticle: FC = () => {
 	const handleAddTagByUser = (setFieldValue: SetFieldValueFn, tagList: Array<string>) => (evt: KeyboardEvent<HTMLInputElement>) => {
 		// if enter released save tag localy
 		if (evt.key === 'Enter') {
+			// if empty
+			if (!newTag) {
+				return toast.warn("Tag can't be empty", { autoClose: 1000 })
+			}
 			// if tag not exist
-			if (!tags?.includes(newTag) && !userDefiendTag.includes(newTag)) {
+			else if (!tags?.includes(newTag) && !userDefiendTag.includes(newTag)) {
 				setUserDefiendTag(s => [...s, newTag])
 
 				// update form
